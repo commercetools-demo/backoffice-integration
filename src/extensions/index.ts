@@ -1,0 +1,1 @@
+export { injectPageTypeIntoDynamicPage } from './utils';
