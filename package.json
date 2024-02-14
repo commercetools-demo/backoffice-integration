@@ -1,5 +1,5 @@
 {
-  "name": "backoffice-integration",
+  "name": "ct-backoffice-integration",
   "version": "0.1.2",
   "description": "Commercetools frontend backoffice integration",
   "main": "dist/index.js",
