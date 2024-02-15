@@ -1,9 +1,23 @@
 {
   "name": "ct-backoffice-integration",
-  "version": "0.1.2",
+  "version": "0.3.4",
   "description": "Commercetools frontend backoffice integration",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./extensions": {
+      "import": "./dist/extensions/index.js",
+      "types": "./dist/extensions/index.d.ts"
+    },
+    "./frontend": {
+      "import": "./dist/frontend/index.js",
+      "types": "./dist/frontend/index.d.ts"
+    }
+  },
   "files": [
     "dist"
   ],
@@ -13,7 +27,10 @@
     "lint:fix": "eslint --fix .",
     "format": "prettier --write \"**/*.ts\"",
     "test": "test",
-    "build": "tsc && dts-bundle-generator -o dist/index.d.ts src/index.ts"
+    "rootTypes": "dts-bundle-generator -o dist/index.d.ts src/index.ts",
+    "extensionsTypes": "dts-bundle-generator -o dist/extensions/index.d.ts src/extensions/index.ts",
+    "frontendTypes": "dts-bundle-generator -o dist/frontend/index.d.ts src/frontend/index.ts",
+    "build": "tsc && yarn rootTypes && yarn extensionsTypes && yarn frontendTypes"
   },
   "repository": {
     "type": "git",

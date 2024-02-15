@@ -5,15 +5,15 @@ import {
   useMerchantCenterIntegrationContext,
   FrontendTasticWrapper,
   MerchantCenterProductWrapper,
+  MerchantCenterIntegrationProvider,
 } from './frontend';
 
-export default {
-  extensions: { injectPageTypeIntoDynamicPage },
-  frontend: {
-    FrontendIntegrationProvider,
-    useFrontendIntegrationContext,
-    useMerchantCenterIntegrationContext,
-    FrontendTasticWrapper,
-    MerchantCenterProductWrapper,
-  },
+export const extensions = { injectPageTypeIntoDynamicPage };
+export const frontend = {
+  FrontendIntegrationProvider,
+  MerchantCenterIntegrationProvider,
+  useFrontendIntegrationContext,
+  useMerchantCenterIntegrationContext,
+  FrontendTasticWrapper,
+  MerchantCenterProductWrapper,
 };

@@ -10,7 +10,7 @@ const initialState: UseMerchantCenterIntegrationReturn = {
 
 const MerchantCenterIntegration: Context<UseMerchantCenterIntegrationReturn> = createContext(initialState);
 
-export const MerchantCenterIntegrationProvider: React.FC<PropsWithChildren<UseMerchantCenterIntegrationReturn>> = ({ children }) => {
+export const MerchantCenterIntegrationProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const { isMenuDisplayed, toggleMenu } = useMerchantCenterIntegrationHook();
   return (
     <MerchantCenterIntegration.Provider

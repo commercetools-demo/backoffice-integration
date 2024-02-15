@@ -4,7 +4,7 @@ import { useMerchantCenterIntegrationContext } from '../providers/merchant-cente
 
 type Props = {
   product?: {
-    productId: string;
+    productId?: string;
   };
   as?: 'div';
 };
