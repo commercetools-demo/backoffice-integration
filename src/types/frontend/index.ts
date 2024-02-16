@@ -18,6 +18,7 @@ export type DynamicPageHandlerResponse =
   | null;
 export interface UseFrontendIntegrationReturn {
   pageData: DynamicPageHandlerResponse;
+  isDisplayed?: boolean;
 }
 
 export interface UseMerchantCenterIntegrationReturn {

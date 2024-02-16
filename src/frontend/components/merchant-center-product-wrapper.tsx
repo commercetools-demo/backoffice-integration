@@ -1,6 +1,7 @@
 import { CubeIcon } from '@heroicons/react/24/outline';
 import React, { HTMLAttributes, PropsWithChildren } from 'react';
 import { useMerchantCenterIntegrationContext } from '../providers/merchant-center';
+import { useFrontendIntegrationContext } from '../providers/frontend';
 
 type Props = {
   product?: {
@@ -16,6 +17,7 @@ export const MerchantCenterProductWrapper: React.FC<PropsWithChildren<Props> & H
   className,
   ...rest
 }) => {
+  const { isDisplayed } = useFrontendIntegrationContext();
   const { isMenuDisplayed } = useMerchantCenterIntegrationContext();
   const region = process.env.NEXT_PUBLIC_INTEGRATION_MC_REGION;
   const project = process.env.NEXT_PUBLIC_INTEGRATION_MC_PROJECT;
@@ -24,7 +26,7 @@ export const MerchantCenterProductWrapper: React.FC<PropsWithChildren<Props> & H
     return (
       <div className={`${className} relative`} {...rest}>
         {children}
-        {isMenuDisplayed && (
+        {isDisplayed && isMenuDisplayed && (
           <div className="absolute left-15 top-10 z-40 p-2">
             <a
               href={`https://mc.${region}.commercetools.com/${project}/products/${product?.productId}`}
@@ -41,7 +43,7 @@ export const MerchantCenterProductWrapper: React.FC<PropsWithChildren<Props> & H
   return (
     <>
       {children}
-      {isMenuDisplayed && (
+      {isDisplayed && isMenuDisplayed && (
         <div className="absolute left-15 top-10 z-50 p-2">
           <a
             href={`https://mc.${region}.commercetools.com/${project}/products/${product?.productId}`}

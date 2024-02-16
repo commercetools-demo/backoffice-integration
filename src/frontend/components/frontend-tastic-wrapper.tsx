@@ -14,7 +14,7 @@ type Props = {
 
 export const FrontendTasticWrapper = ({ children, data: tastic, className }: PropsWithChildren<Props>) => {
   const [isTooltipDisplayed, setIsTooltipDisplayed] = useState(false);
-  const { pageData } = useFrontendIntegrationContext();
+  const { pageData, isDisplayed } = useFrontendIntegrationContext();
   const { toggleMenu, isMenuDisplayed } = useMerchantCenterIntegrationContext();
   const { locale } = useParams();
   const customer = process.env.NEXT_PUBLIC_INTEGRATION_FRONTASTIC_CUSTOMER;
@@ -44,7 +44,7 @@ export const FrontendTasticWrapper = ({ children, data: tastic, className }: Pro
       onMouseLeave={() => setIsTooltipDisplayed(false)}
     >
       {children}
-      {isTooltipDisplayed && (
+      {isDisplayed && isTooltipDisplayed && (
         <div className="absolute top-10 z-40 px-2 shadow-dark">
           <Popover className="relative p-2 leading-tight">
             <Popover.Button>
