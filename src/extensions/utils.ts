@@ -6,6 +6,7 @@ export const injectPageTypeIntoDynamicPage = (dynamicPage: DynamicPageHandlerRes
       return {
         ...dynamicPage,
         dataSourcePayload: {
+          ...dynamicPage.dataSourcePayload,
           pageType: dynamicPage.dynamicPageType,
         },
       };
