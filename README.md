@@ -48,8 +48,9 @@ Refactor `backend/index.ts` according to the below snippet
 ### Frontend
 There are a couple of places that you have to integrate backoffice-integration into the frontend project
 
-1. ***Frontastic renderer***: wrap or replace the top wrapper in rendere with `FrontendIntegrationProvider`
+1. ***Frontastic renderer***: wrap or replace the top wrapper in renderer with `FrontendIntegrationProvider`
     ```diff
+    file: packages/poc/frontend/frontastic/renderer/index.tsx
     + <frontend.FrontendIntegrationProvider pageData={pageData} isDisplayed={true}>
     <div className="flex min-h-screen flex-col items-stretch justify-start">
         {sections.filter(Boolean).map((section) => (
@@ -63,6 +64,7 @@ There are a couple of places that you have to integrate backoffice-integration i
     </frontend.FrontendIntegrationProvider>
     ```
 1. ***Tastic wrapper***: Replace the parent `div` that wraps `<Tastic>` component with `FrontendTasticWrapper`
+2. file: packages/poc/frontend/frontastic/renderer/components/tastic-wrapper/index.tsx
     ```diff
     - <div className={`${highlight(isHighlighted)} ${deviceVisibility(data.configuration)}`}>
     + <backofficeIntegration.FrontendTasticWrapper
@@ -78,6 +80,7 @@ There are a couple of places that you have to integrate backoffice-integration i
     ```
     Wrap everything with `MerchantCenterIntegrationProvider`
      ```diff
+     file: packages/poc/frontend/frontastic/renderer/components/tastic-wrapper/index.tsx
     - <div className={`${highlight(isHighlighted)} ${deviceVisibility(data.configuration)}`}>
     + <backofficeIntegration.MerchantCenterIntegrationProvider>
     + <backofficeIntegration.FrontendTasticWrapper
@@ -99,6 +102,29 @@ There are a couple of places that you have to integrate backoffice-integration i
     examples:
 
     1.***ProductTile***
+   ```diff
+   file: packages/poc/frontend/components/commercetools-ui/organisms/product/product-tile/index.tsx
+   -     <div onClick={onClick} ref={ref}>
+   ...
+   - </div>
+   +     <frontend.MerchantCenterProductWrapper as="div" product={product} onClick={onClick} ref={ref}>
+   ...
+   +     </frontend.MerchantCenterProductWrapper>
+   ```
 
     1.***ProductDetails***
+   ```diff
+   file: packages/poc/frontend/frontastic/tastics/products/details/index.tsx
+   + <frontend.MerchantCenterProductWrapper product={data?.data?.dataSource.product}>
+   <ProductDetailsAdapter
+      product={data?.data?.dataSource.product}
+      attributesToDisplay={
+        (data.attributesToDisplay?.length && data.attributesToDisplay?.map((item: any) => item.key)) || [
+          'color',
+          'size',
+        ]
+      }
+    />
+   + </frontend.MerchantCenterProductWrapper>
+   ```
 
